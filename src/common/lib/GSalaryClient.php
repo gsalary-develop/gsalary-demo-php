@@ -14,6 +14,14 @@ class GSalaryClient
     private $serverPublicKey;
 
     //构造器
+
+    /**
+     * @param string $endpoint 接口地址
+     * @param string $appId 商户ID
+     * @param string $clientPrivateKey 商户私钥字符串，要求包含-----BEGIN PRIVATE KEY-----头部
+     * @param string $serverPublicKey 服务端公钥字符串
+     * @throws GSalaryException
+     */
     public function __construct($endpoint, $appId, $clientPrivateKey, $serverPublicKey)
     {
         //删除endpoint末尾的'/'
@@ -24,7 +32,7 @@ class GSalaryClient
         $this->appId = $appId;
         $this->clientPrivateKey = openssl_get_privatekey(trim($clientPrivateKey));
         if (!$this->clientPrivateKey) {
-            die('Invalid private key');
+            throw new GSalaryException('Invalid private key');
         }
         $serverPublicKey = trim($serverPublicKey);
         //判断是否存在PEM头尾标记，如不存在则添加RSA公钥的PEM头尾标记
@@ -34,7 +42,7 @@ class GSalaryClient
         }
         $this->serverPublicKey = openssl_get_publickey($serverPublicKey);
         if (!$this->serverPublicKey) {
-            die('Invalid public key');
+            throw new GSalaryException('Invalid public key');
         }
     }
 
