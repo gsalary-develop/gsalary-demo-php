@@ -1,0 +1,38 @@
+{
+  "name": "gsalary_demo/1.0.0",
+  "description": "GSalary Demo PHP",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Astro",
+      "email": "astro.dai@globalfreepay.com"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "GSalaryDemo\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GSalary\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "require": {
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "ext-curl": "*"
+  }
+}
